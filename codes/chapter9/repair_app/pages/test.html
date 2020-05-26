@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <div class="mui-content-padded">
+        <img src="../images/1.jpg" />
+        <img src="../images/2.jpg" />
+        <img src="../images/3.jpg" />
+    </div>
+    <div class="mui-slider">
+        <div class="mui-slider-group">
+            <div class="mui-slider-item"><a href="#"><img src="1.jpg" /></a></div>
+            <div class="mui-slider-item"><a href="#"><img src="2.jpg" /></a></div>
+            <div class="mui-slider-item"><a href="#"><img src="3.jpg" /></a></div>
+            <div class="mui-slider-item"><a href="#"><img src="4.jpg" /></a></div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var page = mui.preload({
+            url:new-page-url,
+            id:new-page-id,//默认使用当前页面的url作为id
+            styles:{},//窗口参数
+            extras:{}//自定义扩展参数
+        });
+        
+        var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);
+        var msg;
+        //插入数据-C
+        db.transaction(function (tx) {
+            tx.executeSql('CREATE TABLE IF NOT EXISTS LOGS (id unique, log)');
+            tx.executeSql('INSERT INTO LOGS (id, log) VALUES (1, "H5+移动应用开发实战")');
+            tx.executeSql('INSERT INTO LOGS (id, log) VALUES (2, "www.runoob.com")');
+            msg = '<p>数据表已创建，且插入了两条数据。</p>';
+            document.querySelector('#status').innerHTML =  msg;
+        });
+        //删除数据-D
+        db.transaction(function (tx) {
+            tx.executeSql('DELETE FROM LOGS  WHERE id=1');
+            msg = '<p>删除 id 为 1 的记录。</p>';
+            document.querySelector('#status').innerHTML =  msg;
+        });
+        //更新数据-U
+        db.transaction(function (tx) {
+            tx.executeSql('UPDATE LOGS SET log=\'www.w3cschool.cc\' WHERE id=2');
+            msg = '<p>更新 id 为 2 的记录。</p>';
+            document.querySelector('#status').innerHTML =  msg;
+        });
+        //查询数据-R
+        db.transaction(function (tx) {
+            tx.executeSql('SELECT * FROM LOGS', [], function (tx, results) {
+                var len = results.rows.length, i;
+                msg = "<p>查询记录条数: " + len + "</p>";
+                document.querySelector('#status').innerHTML +=  msg;
+       
+                for (i = 0; i < len; i++){
+                    msg = "<p><b>" + results.rows.item(i).log + "</b></p>";
+                    document.querySelector('#status').innerHTML +=  msg;
+                }
+            }, null);
+        });
+
+    </script>
+</body>
+</html>

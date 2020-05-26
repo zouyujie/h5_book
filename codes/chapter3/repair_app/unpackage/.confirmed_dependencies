@@ -1,0 +1,16 @@
+{
+	"index.html": {
+		"href": "index.html",
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [],
+		"priority": 0
+	},
+	"login.html": {
+		"refer": [
+			"guide.html"
+		]
+	}
+}

@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <style type="text/css">
+        /*<div> 不会显示，直到编译结束。*/
+        [v-cloak] {display: none !important;}/*visibility: hidden;*/
+        html{font-size:14px;}
+        .red{color:red;}
+        .green{color:green;}
+        .div_color{font-size:16px;}
+        content>div{
+            line-height:30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <header></header>
+        <content>
+            <div v-bind:title="pageData.message">
+                鼠标悬停几秒钟查看此处动态绑定的提示信息！
+            </div>
+            <div v-text="pageData.firstSwordsMan"></div>
+            <div>{{pageData.firstSwordsMan}}</div>
+            <div v-cloak>谁是最可爱的人：{{theCutest}}</div>
+            <div class="div_color"  v-bind:class="{red:color==1,green:color==2}">我是什么颜色</div>
+            <div><button v-on:click="changeColor(1)">红色</button><button v-on:click="changeColor(2)">绿色</button></div>
+            <div><button  v-bind:style="{ color: activeColor}">style操作</button></div>
+            <ul><li v-for="item in items" :key="item.id" v-text="item.message"></li></ul>
+            <div><button v-on:click="addUL">增加记录</button><button v-on:click="modifyUL">修改</button></div>
+            <div>输入信息：<input type="text" v-model="inputVal"/></div>
+        </content>
+    </div>
+</body>
+<script src="js/vue.min.js"></script>
+<script type="text/javascript">
+    var app = new Vue({
+        el: '#app',
+        data: {
+            theCutest:'每个人心中都有答案',
+            pageData: {
+                message: '你看到我了',
+                firstSwordsMan: '天下第一剑谢晓峰',
+                firstMan: '天下第一高手不败顽童古三通'
+            },
+            color: 1,
+            activeColor: 'red',
+            inputVal:'邹琼俊',
+            items:[ {message:"Test one",id:"1"}, {message:"Test two",id:"2"}, {message:"Test three",id:"3"} ]
+        },
+        //钩子函数
+        mounted: function () {
+            //初始化
+        },
+        methods: {
+            //改变颜色
+            changeColor: function (color) {
+                this.color = color;//这里的this指向对象app
+            },
+            //增加记录
+            addUL: function () {
+                this.items.push({ message: "Test four", id: "4" });
+            },
+            //修改记录参数解读：
+            //target：要更改的数据源(可以是对象或者数组)
+            //key：要更改的具体数据
+            //value ：重新赋的值
+            modifyUL: function () {
+                Vue.set(app.items, 2, { message: "第三条记录", id: "3" });//app.items也可以用this.items
+            }
+        }
+    })
+</script>
+</html>

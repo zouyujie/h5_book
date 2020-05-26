@@ -1,0 +1,26 @@
+{
+	"index.html": {
+		"href": "index.html",
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"pages/home.html"
+		],
+		"refer": [
+			"pages/home.html"
+		],
+		"priority": 0
+	},
+	"login.html": {
+		"refer": [
+			"guide.html",
+			"index.html"
+		]
+	},
+	"pages/home.html": {
+		"refer": [
+			"pages/home/add-repair-content.html",
+			"pages/home/task-main.html"
+		]
+	}
+}

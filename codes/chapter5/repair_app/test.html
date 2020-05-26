@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">底部选项卡-div模式</h1>
+    </header>
+    <nav class="mui-bar mui-bar-tab">
+        <a class="mui-tab-item mui-active" href="#tabbar">
+            <span class="mui-icon mui-icon-home"></span>
+            <span class="mui-tab-label">首页</span>
+        </a>
+        <a class="mui-tab-item" href="#tabbar-with-chat">
+            <span class="mui-icon mui-icon-email"><span class="mui-badge">9</span></span>
+            <span class="mui-tab-label">消息</span>
+        </a>
+        <a class="mui-tab-item" href="#tabbar-with-contact">
+            <span class="mui-icon mui-icon-contact"></span>
+            <span class="mui-tab-label">通讯录</span>
+        </a>
+        <a class="mui-tab-item" href="#tabbar-with-map">
+            <span class="mui-icon mui-icon-gear"></span>
+            <span class="mui-tab-label">设置</span>
+        </a>
+    </nav>
+    <div class="mui-content">
+        <div id="tabbar" class="mui-control-content mui-active">
+            <div class="title">这是div模式选项卡中的第1个子页面.</div>
+        </div>
+        <div id="tabbar-with-chat" class="mui-control-content">
+            <div class="title">这是div模式选项卡中的第2个子页面，该页面展示一个消息列表</div>
+        </div>
+        <div id="tabbar-with-contact" class="mui-control-content">
+            <div class="title">这是div模式选项卡中的第3个子页面，该页面展示一个通讯录示例.</div>
+        </div>
+        <div id="tabbar-with-map" class="mui-control-content">
+            <div class="title">这是div模式选项卡中的第4个子页面，该页面展示一个常见的设置示例.</div>
+        </div>
+    </div>
+
+
+    <nav class="mui-bar mui-bar-tab ">
+        <a class="mui-tab-item" href="#Popover_0">产品</a>
+        <a class="mui-tab-item" href="#Popover_1">方案</a>
+        <a class="mui-tab-item" href="#Popover_2">新闻</a>
+    </nav>
+    <div class="mui-content">
+        <div class="mui-content-padded">
+            <p style="text-indent: 22px;">这是包含二级菜单的底部选项卡示例，点击底部菜单，会展开显示对应的二级菜单。</p>
+        </div>
+    </div>
+    <div id="Popover_0" class="mui-popover mui-bar-popover">
+        <div class="mui-popover-arrow"></div>
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell">
+                <a href="#">iOS</a>
+            </li>
+            <li class="mui-table-view-cell">
+                <a href="#">Android</a>
+            </li>
+            <li class="mui-table-view-cell">
+                <a href="#">HTML5</a>
+            </li>
+        </ul>
+    </div>
+    <div id="Popover_1" class="mui-popover mui-bar-popover">
+        <div class="mui-popover-arrow"></div>
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell">
+                <a href="#">PC方案</a>
+            </li>
+            <li class="mui-table-view-cell">
+                <a href="#">手机方案</a>
+            </li>
+            <li class="mui-table-view-cell">
+                <a href="#">TV方案</a>
+            </li>
+        </ul>
+    </div>
+    <div id="Popover_2" class="mui-popover mui-bar-popover">
+        <div class="mui-popover-arrow"></div>
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell">
+                <a href="#">公司新闻</a>
+            </li>
+            <li class="mui-table-view-cell">
+                <a href="#">行业新闻</a>
+            </li>
+        </ul>
+    </div>
+
+</body>
+</html>

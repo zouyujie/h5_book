@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="js/mui.min.js"></script>
+</head>
+<body>
+    <script type="text/javascript">
+        mui.init({
+            preloadPages: [
+              {
+                  url: prelaod - page - url,
+                  id: preload - page - id,
+                  styles: {},//窗口参数
+                  extras: {},//自定义扩展参数
+                  subpages: [{}, {}]//预加载页面的子页面
+              }
+            ],
+            preloadLimit: 5//预加载窗口数量限制(一旦超出,先进先出)默认不限制
+        });
+        mui.init({
+            preloadPages: [
+              {
+                  url: 'list.html',
+                  id: 'list'
+              }
+            ]
+        });
+        var list = plus.webview.getWebviewByid('list');//这里可能返回空；
+
+        var page = mui.preload({
+            url:new-page-url,
+            id:new-page-id,//默认使用当前页面的url作为id
+            styles:{},//窗口参数
+            extras:{}//自定义扩展参数
+        });
+    </script>
+</body>
+</html>

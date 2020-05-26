@@ -1,0 +1,360 @@
+﻿<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/base.css" />
+		<link rel="stylesheet" href="../css/app/my.css" />
+		<script type="text/javascript" src="../js/libs/flexible.js"></script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<div class="divset">
+				<a id="btnSetting" class="mui-icon iconfont icon-shezhi"></a>
+			</div>
+		</header>
+		<div id="app" class="mui-content bc">
+			<div class="user-header">
+				<div class="user-portrait">
+					<div class="portrait-img fl"><img src="" id="head-img" onerror="this.src = '../img/tab_3.png'"/></div>
+					<!--onerror="this.src = '../img/tab_3.png'"-->
+					<div class="portrait-userinfo fl">
+						<p class="portrait-name" v-text="userName"></p>
+						<p class="portrait-job" v-text="roleName"></p>
+					</div>
+					<div class="portrait-clockin fr">
+						<div class="dot" v-on:tap="doPunchCard()">
+							<div class="dot2">
+								<div class="dot3">
+									<ul>
+										<li class="one fl" v-text="nowTime"></li>
+										<li class="fl">打卡</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div v-if="appRole!=comm.pm" class="user-release margin-bottom-10">
+				<a v-on:tap="prize()" class="user-item clear orange-red noborder">
+					<i class="mui-icon iconfont icon-jinqian"></i>
+					<span class="title">奖励金额</span>
+					<div class="release-right">
+						<i class="mui-icon mui-icon-arrowright"></i>
+					</div>
+					<span class="fr spn-money"><span v-text="Rewards.Amount_Month"></span>元</span>
+				</a>
+			</div>
+			<div class="user-release margin-bottom-10">
+				<a class="user-item clear orange" id="punch-card">
+					<i class="mui-icon iconfont icon-kaoqinguanli"></i>
+					<span class="title">打卡考勤</span>
+					<div class="release-right">
+						<i class="mui-icon mui-icon-arrowright"></i>
+					</div>
+				</a>
+				<a class="user-item clear orange noborder" id="duty">
+					<i class="mui-icon iconfont icon-rili"></i>
+					<span class="title">值班管理</span>
+					<div class="release-right">
+						<i class="mui-icon mui-icon-arrowright"></i>
+					</div>
+				</a>
+			</div>
+			<div class="user-release margin-bottom-10">
+				<a class="user-item clear blue" id="dataCenter">
+					<i class="mui-icon iconfont icon-shujutongji"></i>
+					<span class="title">数据中心</span>
+					<div class="release-right">
+						<i class="mui-icon mui-icon-arrowright"></i>
+					</div>
+				</a>
+				<!--<a id="account" class="user-item clear blue noborder">
+					<i class="mui-icon iconfont icon-taizhang"></i>
+					<span class="title">设备台账</span>
+					<div class="release-right">
+						<i class="mui-icon mui-icon-arrowright"></i>
+					</div>
+				</a>-->
+			</div>
+			<div class="user-release margin-bottom-10">
+				<!--<a id="news" v-if="appRole==comm.repairman" class="user-item clear green">
+					<i class="mui-icon iconfont icon-news"></i>
+					<span class="title">我的消息</span>
+					<div class="release-right">
+						<i class="mui-icon mui-icon-arrowright"></i>
+					</div>
+				</a>-->
+				<a class="user-item clear green noborder" id="address-book">
+					<i class="mui-icon iconfont icon-tongxunlu"></i>
+					<span class="title">通讯录</span>
+					<div class="release-right">
+						<i class="mui-icon mui-icon-arrowright"></i>
+					</div>
+				</a>
+			</div>
+			<div class="user-table">
+				<a class="user-item clear purple" id='knowledgebase'>
+					<i class="mui-icon iconfont icon-repository"></i>
+					<span class="title">知识库</span>
+					<div class="release-right">
+						<i class="mui-icon mui-icon-arrowright"></i>
+					</div>
+				</a>
+				<a class="user-item clear purple" id="help">
+					<i class="mui-icon iconfont icon-help"></i>
+					<span class="title">帮助</span>
+					<div class="release-right">
+						<i class="mui-icon mui-icon-arrowright"></i>
+					</div>
+				</a>
+				<a class="user-item clear purple" id="feedback">
+					<i class="mui-icon iconfont icon-icon18"></i>
+					<span class="title">反馈</span>
+					<div class="release-right">
+						<i class="mui-icon mui-icon-arrowright"></i>
+					</div>
+				</a>
+			</div>
+			<div id="punchCard" class="mui-popover">
+				<div class="rowone"><i class="mui-icon iconfont icon-queding"></i><span>打卡成功</span></div>
+				<div class="rowtwo">
+					<div class="date-line"></div>
+					<div class="date-diamond">
+						<p class="oneline" v-text="tag"></p>
+						<p class="twoline" v-text="nowTime"></p>
+					</div>
+				</div>
+				<div class="rowthree">愉悦的一天，从到公司的第一刻开始！</div>
+				<div class="rowfour">
+					<a class="mui-btn" href="#punchCard">我知道了</a>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/libs/h.js"></script>
+		<script type="text/javascript" src="../js/libs/vue.min.js"></script>
+		<script type="text/javascript" src="../js/common/config.js"></script>
+        <script src="../js/common/webSql.js"></script>
+        <script src="../js/libs/mock-min.js"></script>
+		<script type="text/javascript" src="../js/common/global.js" charset="utf-8"></script>
+        <script src="../js/common/mockdata.js"></script>
+		<script type="text/javascript" src="../js/libs/multipleUploader.js"></script>
+        <script src="../js/app/my/my.js"></script>
+		<script type="text/javascript">
+		  var PUNCH_SITE = '';
+			var defaultUrl = "../img/tab_3.png";
+			var app = new Vue({
+				el: '#app',
+				data: {
+					face: '', //头像
+					userName: '',
+					roleName: '',
+					tag: '',
+					nowTime: g.getTimeNow(),
+					appRole: g.AppRoleType, //app角色类型
+					repairTitle: (g.AppRoleType == comm.repairman) ? '我的报修' : '我的维修单',
+					Rewards:{}
+				},
+				mounted: function() {
+				    mui.init();
+					var _self = this;
+					mui.ready(function() {
+						var userInfo = g.getUserInfo();
+						if (userInfo != null && userInfo.USER_ID) {
+							//console.log(userInfo.USER_ID);
+							_self.userName = userInfo.NAME;
+							_self.roleName = userInfo.ROLE_NAME;
+							_self.face = userInfo.FACE;
+							defaultUrl = userInfo.GENDER == 1 ? '../img/tab_3.png' : '../img/tab_0.png';
+						}
+						eventListener();
+						loadRewards();
+						InitHeaderPic(); //获取头像
+						//if(_self.appRole == comm.repairman || _self.appRole == comm.leader) {
+						//    loadRewards();
+					    //}
+					})
+					mui.plusReady(function() {
+							g.getCurrentPosition(initAddress);
+						//g.initHeadImg("head-img", defaultUrl);
+						setTimeout(function() {
+							g.initImgPreview("#head-img");
+						}, 200);
+						var vw = plus.webview.currentWebview();
+						if(_self.appRole == comm.repairman || _self.appRole == comm.leader) {
+							vw.addEventListener("show", loadRewards, false);
+						}
+					})
+				},
+				methods: {
+					//打卡
+					doPunchCard: function() {					 
+						if(PUNCH_SITE=='') {
+							 mui.toast('请打开GPS完成打卡');
+							 return;
+						}
+						g.ajax(config.Punch, {
+							data: {
+								ORG_CODE: config.ORG_CODE,
+								USER_ID: config.USER_ID,
+								PUNCH_SITE: PUNCH_SITE
+							},
+							success: function(data) {
+								if(data.StatusCode == '200') {
+									if(data.Data == '0') {
+										app.tag = '上班';
+									} else {
+										app.tag = '下班';
+									}
+									mui('#punchCard').popover('toggle');
+
+								} else {
+									mui.toast(data.Message);
+								}
+							}
+						})
+					},
+					//奖励金额
+					prize: function() {
+						var _id = "my/prize.html";
+						g.openWindow({ //目标页面
+							id: _id,
+							url: _id,
+							extras: {
+								Rewards: app.Rewards
+							}
+						});
+					}
+				}
+			})
+
+			function loadRewards() {
+				//console.log('loadRewards')
+				g.ajax(config.BillRewardForUser, {
+					data: {
+						userId: config.USER_ID
+					},
+					success: function(data) {
+					    console.log('data:'+JSON.stringify(data))
+						if(data.StatusCode == '200' && data.Data) {
+							//console.log(JSON.stringify(data.Data))
+						    app.Rewards = data.Data;
+						}
+					}
+				})
+			}
+			function showImg() {
+				h("#head-img").attr('src', smpCurUrl);
+			}
+			function eventListener() {
+				//打卡考勤
+				h("#punch-card").tap(function() {
+					g.openWindow({
+						url: "my/punch-card.html",
+						id: "punch-card",
+						extras: {
+							imgUrl: h("#head-img").attr('src'),
+							userName: app.userName,
+							roleName: app.roleName
+						}
+					})
+				});
+				//值班管理
+				h("#duty").tap(function() {
+					g.openWindow({
+						url: "my/duty.html",
+						id: "duty"
+					})
+				})
+				//数据统计
+				h("#dataCenter").tap(function() {
+					g.openWindowWithTitle({
+						url: "my/data-center.html",
+						id: "data-center"
+					}, '数据中心')
+				})
+				//更换头像
+				//				h("#head-img").tap(function() {
+				//					showActionSheet({
+				//						id: 'head-img',
+				//						multiple: false,
+				//						showDetaiFun: showImg
+				//					})
+				//				});
+				//设置
+				h('#btnSetting').tap(function () {
+				    g.openWindow({
+				        id: 'setting',
+				        url: 'my/setting.html',
+				        extras: {
+				            imgUrl: h("#head-img").attr('src'),
+				            userName: app.userName
+				        }
+				    });
+				})
+				//设备台账
+				h("#account").tap(function() {
+					g.openWindow({
+						url: "my/account.html",
+						id: "account"
+					})
+				});
+				//知识库
+				h("#knowledgebase").tap(function() {
+					g.openWindow({
+						url: "my/knowledgebase.html",
+						id: "knowledgebase"
+					})
+				});
+				//帮助
+				h("#help").tap(function() {
+					g.openWindowWithTitle({
+						url: "my/help.html",
+						id: "help"
+					}, '帮助')
+				})
+				//反馈
+				h("#feedback").tap(function() {
+					g.openWindowWithTitle({
+						url: "my/feedback.html",
+						id: "feedback"
+					}, '意见和反馈')
+				})
+				//通讯录
+				h("#address-book").tap(function() {
+					g.openWindowWithTitle({
+						url: "my/address-book.html",
+						id: "address-book"
+					}, '通讯录')
+				})
+				//我的消息
+				h("#news").tap(function() {
+					g.openWindowWithTitle({
+						url: "my/news.html",
+						id: "news"
+					}, '我的消息')
+				})
+			}
+			//自动更新当前时间
+			setInterval(function () {
+			    app.nowTime = g.getTimeNow()
+			}, 1000);
+            //刷新头像
+			function refreshHeadImg() {
+			    console.log('refreshHeadImg');
+			    g.initHeadImg("head-img", defaultUrl);
+			}
+			//初始化地址信息
+			function initAddress(address) {
+				PUNCH_SITE=address;
+				}
+		</script>
+	</body>
+
+</html>
